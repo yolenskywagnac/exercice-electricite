@@ -241,5 +241,5 @@ st.markdown(
     """
 )
 
-with st.expander("📂 Voir les données filtrées"):
+with st.expander("Voir les données filtrées"):
     st.dataframe(df_filtre, hide_index=True)
