@@ -30,6 +30,8 @@ communes_sel = st.sidebar.multiselect(
     default=communes_toutes,
 )
 
+
+
 annees_toutes = sorted(df["annee"].unique(), reverse=True)
 annee_sel = st.sidebar.selectbox(
     "Année :",
@@ -44,6 +46,15 @@ if not communes_sel:
 df_filtre = df[(df["annee"] == annee_sel) & (df["commune"].isin(communes_sel))]
 df_communes = df[df["commune"].isin(communes_sel)]
 
-brut = pd.read_csv(DOSSIER / "consommation_brut.csv")
-st.write(f"Le fichier brut compte {len(brut)} lignes.")
-st.dataframe(brut.head(10), hide_index=True)
+st.subheader(f"Indicateurs clés ({annee_sel})")
+col1, col2, col3 = st.columns(3)
+
+kwh_total_m = df_filtre["kwh"].sum() / 1e6
+kwh_abonne_moy = df_filtre["kwh_par_abonne"].mean()
+heures_courant_moy = df_filtre["heures_courant"].mean()
+
+col1.metric("Consommation totale", f"{kwh_total_m:.2f} M kWh")
+col2.metric("Consommation moyenne / abonné", f"{kwh_abonne_moy:.1f} kWh")
+col3.metric("Heures de courant moyennes / jour", f"{heures_courant_moy:.1f} h")
+
+st.markdown("---")
