@@ -230,3 +230,16 @@ with tab5:
     st.pyplot(fig_top)
     plt.close(fig_top)
     st.dataframe(top3_df, hide_index=True)
+
+st.markdown("---")
+st.subheader("Conclusion générale")
+st.markdown(
+    """
+    1. **La consommation suit l'offre d'électricité, pas la chaleur :** dans les quartiers résidentiels, la corrélation avec les heures de courant atteint **0.76**, contre **-0.15** avec la température. Les ménages consomment dès que l'électricité est disponible.
+    2. **Des disparités territoriales marquées :** Cap-Haïtien subit les coupures les plus pénalisantes (médiane de **10.0 heures** par jour contre 11.6 à 11.9 h ailleurs), tandis que les zones commerciales (Centre-ville à **468.7 kWh/abonné**, Place Saint-Pierre à **458.3 kWh/abonné**) représentent les usages les plus intensifs.
+    3. **Ce qu'une corrélation ne permet pas de conclure :** une corrélation statistique ne démontre pas de causalité exclusive et ne permet pas d'évaluer la demande latente non satisfaite si le réseau alimentait les abonnés sans interruption 24h sur 24.
+    """
+)
+
+with st.expander("📂 Voir les données filtrées"):
+    st.dataframe(df_filtre, hide_index=True)
